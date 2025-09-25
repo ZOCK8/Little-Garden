@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
-using UnityEditor.Search;
 using UnityEngine;
 
 public class InventoryManger : MonoBehaviour
@@ -11,6 +9,10 @@ public class InventoryManger : MonoBehaviour
     private int CurrentItemInt;
     [SerializeField] private GameObject ItemParent;
     [SerializeField] private Transform PlayerHand;
+    [SerializeField] private UnityEngine.UI.Image ItemShowcaseLeft;
+    [SerializeField] private UnityEngine.UI.Image ItemShowcaseMiddle;
+    [SerializeField] private UnityEngine.UI.Image ItemShowcaseRight;
+
     private GameObject CurrentItemObject;
     void Start()
     {
@@ -24,6 +26,7 @@ public class InventoryManger : MonoBehaviour
             CurrentItemInt = 0;
         }
         CurrentItem = ItemsInInv[CurrentItemInt];
+        UpdateShowcase();
         CheckItem();
     }
     public void LastItem()
@@ -34,6 +37,7 @@ public class InventoryManger : MonoBehaviour
             CurrentItemInt = ItemsInInv.Count - 1;
         }
         CurrentItem = ItemsInInv[CurrentItemInt];
+        UpdateShowcase();
         CheckItem();
     }
 
@@ -48,10 +52,32 @@ public class InventoryManger : MonoBehaviour
         Item.name = CurrentItem.ItemName;
         Item.transform.position = PlayerHand.position;
         CurrentItemObject = Item;
+        UpdateShowcase();
     }
 
     void LateUpdate()
     {
-      CurrentItemObject.transform.position = PlayerHand.position;
+        CurrentItemObject.transform.position = PlayerHand.position;
+    }
+    public void UpdateShowcase()
+    {
+        Debug.Log("ddsdasd");
+        // left item
+        int Leftint = CurrentItemInt - 1;
+        if (Leftint < 0)
+        {
+            Leftint = ItemsInInv.Count - 1;
+        }
+        // right item
+        int Rightint = CurrentItemInt + 1;
+        if (Rightint >= ItemsInInv.Count)
+        {
+            Rightint = 0;
+        }
+
+        ItemShowcaseLeft.sprite = ItemsInInv[Leftint].ShowcaseImage;
+        ItemShowcaseMiddle.sprite = ItemsInInv[CurrentItemInt].ShowcaseImage;
+        ItemShowcaseRight.sprite = ItemsInInv[Rightint].ShowcaseImage;
+
     }
 }

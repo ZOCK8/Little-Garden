@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5cff6b8ab709001cbe53a3562c2ad7f, type: 3}
-  m_Name: Shovel
+  m_Name: Carot
   m_EditorClassIdentifier: Assembly-CSharp::Items
-  ItemName: Shovel
-  ItemType: 0
-  ObjectInHand: {fileID: 6491832573616220257, guid: 2584478e6d850c7e79726e3f88df6170, type: 3}
-  SellPrice: 1
-  BuyPrice: 2
-  ShowcaseImage: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  ItemName: carot
+  ItemType: 2
+  ObjectInHand: {fileID: 6491832573616220257, guid: aaaaf366e9f6b60e48a28da8812b8cea, type: 3}
+  SellPrice: 0
+  BuyPrice: 1
+  ShowcaseImage: {fileID: -1347532211411968617, guid: 443e55e64418a10c6bce895a78d5fc3f, type: 3}

@@ -15,6 +15,7 @@ public class Items : ScriptableObject
     public ItemTypeEnum ItemType;
     public GameObject ObjectInHand;
     public int SellPrice;
-    public int BuyPrice; 
+    public int BuyPrice;
+    public Sprite ShowcaseImage;
     
 }
