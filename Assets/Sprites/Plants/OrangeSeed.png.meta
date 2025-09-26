@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: 6a5f600ca74da2e4a82f40268c0f2fdd
+guid: f5e7a167924be3d82bbb16e79cd0e60b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7523970955242101793
-    second: Lettuce_0
-  - first:
-      213: 4535925395531633388
-    second: Lettuce_1
+      213: 3080355106376764048
+    second: OrangeSeed_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lettuce_0
+      name: OrangeSeed_0
       rect:
         serializedVersion: 2
         x: 0
-        y: 2
-        width: 33
-        height: 26
+        y: 0
+        width: 56
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,30 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd32078a74c759790800000000000000
-      internalID: -7523970955242101793
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Lettuce_1
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 3
-        width: 33
-        height: 26
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: ce216586d18d2fe30800000000000000
-      internalID: 4535925395531633388
+      spriteID: 09ac5a916ae9fba20800000000000000
+      internalID: 3080355106376764048
       vertices: []
       indices: 
       edges: []
@@ -173,8 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lettuce_0: -7523970955242101793
-      Lettuce_1: 4535925395531633388
+      OrangeSeed_0: 3080355106376764048
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -10,6 +10,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] public GameObject PlayerObject;
     [SerializeField] private Tilemap GardenTile;
     [SerializeField] private Tile DirtTile;
+    [SerializeField] private Tile DirtPlantTile;
     [SerializeField] private GameObject PlantsContainer;
     private InputSystem_Actions InputSystem;
     private Rigidbody2D PlayerRb;
@@ -17,6 +18,7 @@ public class PlayerMovment : MonoBehaviour
     private TilemapCollider2D TCGarden;
     private Vector2 moveInput;
     public InventoryManger inventoryManger;
+    private Vector3 PlantingPos;
     void Awake()
     {
         InputSystem = new InputSystem_Actions();
@@ -92,10 +94,19 @@ public class PlayerMovment : MonoBehaviour
         if (InputSystem.Player.Interact.WasPressedThisFrame() && inventoryManger.CurrentItem.ItemType == ItemTypeEnum.Plant && PlayerRb.IsTouching(TCGarden))
         {
             Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
-            if (GardenTile.GetTile(TilePos) == DirtTile)
+            Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.7f, 0);
+            PlantingPos = cellCenterPos;
+            for (int i = 0; i < PlantsContainer.transform.childCount; i++)
             {
-                Debug.Log("Planting Plant");
-                Planting();
+                if (PlantsContainer.transform.GetChild(i).transform.position != cellCenterPos)
+                {
+                    if (GardenTile.GetTile(TilePos) == DirtTile)
+                    {
+                        Debug.Log("Planting Plant");
+                        Planting();
+                    }
+
+                }
             }
         }
         /////////////////////////////
@@ -116,17 +127,17 @@ public class PlayerMovment : MonoBehaviour
     }
     public void Planting()
     {
-        Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
-        Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.5f, 0);
         GameObject PlantingPlant = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
-        PlantingPlant.transform.position = cellCenterPos;
+        Vector3Int tilepos = GardenTile.WorldToCell(PlantingPos);
+        GardenTile.SetTile(tilepos, DirtPlantTile); //setzt die neue tile
+        PlantingPlant.transform.position = PlantingPos;
         if (PlantingPlant.GetComponent<Plants>().items == null)
         {
             PlantingPlant.GetComponent<Plants>().items = inventoryManger.CurrentItem;
         }
         else
         {
-            Debug.LogError("The current Item has no Items Pleas add!");
+            Debug.LogError("The current Item has not Items Pleas add!");
         }
         PlantingPlant.transform.SetParent(PlantsContainer.transform);
 
