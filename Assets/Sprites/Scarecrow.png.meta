@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: ee0159d96de2824649ce3ecabeb37a03
+guid: e2056b39bc88a4f96b58bc0910c66aba
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 384584660560165467
-    second: UpFence_0
+      213: 7208014375415968472
+    second: Scarecrow_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -37,7 +37,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -51,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: UpFence_0
+      name: Scarecrow_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 9
-        height: 32
+        width: 64
+        height: 62
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b5ab0ce06b1565500800000000000000
-      internalID: 384584660560165467
+      spriteID: 8d2f39e72e2080460800000000000000
+      internalID: 7208014375415968472
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      UpFence_0: 384584660560165467
+      Scarecrow_0: 7208014375415968472
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
