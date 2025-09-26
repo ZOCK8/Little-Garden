@@ -9,8 +9,7 @@ public class PlayerMovment : MonoBehaviour
 {
     [SerializeField] public GameObject PlayerObject;
     [SerializeField] private Tilemap GardenTile;
-    [SerializeField] private Tile DirtTile;
-    [SerializeField] private Tile DirtPlantTile;
+    [SerializeField] private RuleTile DirtTile;
     [SerializeField] private GameObject PlantsContainer;
     private InputSystem_Actions InputSystem;
     private Rigidbody2D PlayerRb;
@@ -64,6 +63,8 @@ public class PlayerMovment : MonoBehaviour
         {
             inventoryManger.NextItem();
         }
+        //////////////////////
+        /// The Gras to farmland system
 
         if (InputSystem.Player.Interact.WasPressedThisFrame())
         {
@@ -76,14 +77,10 @@ public class PlayerMovment : MonoBehaviour
 
                     Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
                     TileBase tile = GardenTile.GetTile(TilePos);
-                    if (tile.name == "Grass_0")
+                    if (tile.name == "Grass")
                     {
                         Debug.Log("Ther is dirt to destroy at: " + tile.name);
                         GardenTile.SetTile(TilePos, DirtTile);
-                    }
-                    else
-                    {
-                        Debug.Log("no grass at: " + tile.name);
                     }
                 }
             }
@@ -96,18 +93,23 @@ public class PlayerMovment : MonoBehaviour
             Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
             Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.7f, 0);
             PlantingPos = cellCenterPos;
+            bool alreadyUsed = false;
             for (int i = 0; i < PlantsContainer.transform.childCount; i++)
             {
-                if (PlantsContainer.transform.GetChild(i).transform.position != cellCenterPos)
+                if (PlantsContainer.transform.GetChild(i).position == cellCenterPos)
                 {
-                    if (GardenTile.GetTile(TilePos) == DirtTile)
-                    {
-                        Debug.Log("Planting Plant");
-                        Planting();
-                    }
-
+                    alreadyUsed = true;
+                    break; // reicht, eine Pflanze gefunden → abbrechen
                 }
             }
+
+            if (!alreadyUsed && GardenTile.GetTile(TilePos)?.name == "FarmLand")
+            {
+                Debug.Log("Planting Plant");
+                Planting();
+            }
+
+
         }
         /////////////////////////////
         /// Player Plant Destroying
@@ -133,7 +135,7 @@ public class PlayerMovment : MonoBehaviour
                 {
                     PlantsContainer.transform.GetChild(i).GetComponent<Plants>().WasWatered = true;
                     Vector3Int PosTile = GardenTile.WorldToCell(PlantsContainer.transform.GetChild(i).transform.position);
-                    GardenTile.SetTile(PosTile, DirtPlantTile);
+                    GardenTile.SetColor(PosTile, Color.antiqueWhite);
                 }
             }
         }
@@ -145,7 +147,7 @@ public class PlayerMovment : MonoBehaviour
     {
         GameObject PlantingPlant = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
         Vector3Int tilepos = GardenTile.WorldToCell(PlantingPos);
-        GardenTile.SetTile(tilepos, DirtPlantTile); //setzt die neue tile
+        GardenTile.SetColor(tilepos, Color.antiqueWhite);
         PlantingPlant.transform.position = PlantingPos;
         if (PlantingPlant.GetComponent<Plants>().items == null)
         {

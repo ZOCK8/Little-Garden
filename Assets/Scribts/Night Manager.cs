@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Data;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 using UnityEngine.UI;
@@ -6,7 +7,7 @@ using UnityEngine.UI;
 public class NightDay : MonoBehaviour
 {
     public int day;
-    [SerializeField] private Tile DirtTile;
+    [SerializeField] private RuleTile DirtTile;
     [SerializeField] private GameObject NightUI;
     [SerializeField] private GameObject PlantsContainer;
     [SerializeField] private Tilemap GroundTileMap;
@@ -35,7 +36,7 @@ public class NightDay : MonoBehaviour
             NightUI.SetActive(false);
             EndDay = false;
 
-            yield return new WaitForSeconds(30); // Nachtdauer
+            yield return new WaitForSeconds(300); // Nachtdauer
 
             NightUI.SetActive(true);
             UpdatePlants();
@@ -52,6 +53,7 @@ public class NightDay : MonoBehaviour
             Vector3Int TilePos = GroundTileMap.WorldToCell(plant.transform.position);
             day += 1;
             GroundTileMap.SetTile(TilePos, DirtTile);
+            GroundTileMap.SetColor(TilePos , Color.white);
 
             plant.GrowStatus += plant.WasWatered ? 1 : -1;
         }
