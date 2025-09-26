@@ -5,16 +5,17 @@ using UnityEngine;
 public class Plants : MonoBehaviour
 {
     private GameObject CurrentPlant;
-    [SerializeField] private int GrowStatus;
+    [SerializeField] public int GrowStatus;
     private int day;
     [SerializeField] private int StartGrow;
-    [SerializeField] private List<Sprite> PlantStageImages;
+    private Animator PlantStageAnimator;
 
-     private SpriteRenderer PlantSprrite;
+    private SpriteRenderer PlantSprrite;
     private BoxCollider2D PlayerBox;
     private BoxCollider2D PlantBox;
     private InputSystem_Actions InputSystem;
     public bool IsDone;
+    public bool WasWatered;
     public Items items;
 
 
@@ -29,6 +30,7 @@ public class Plants : MonoBehaviour
         }
 
         InputSystem = new InputSystem_Actions();
+        PlantStageAnimator = this.gameObject.GetComponent<Animator>();
         CurrentPlant = this.gameObject;
         GrowStatus = 0;
         StartGrow = day;
@@ -38,16 +40,30 @@ public class Plants : MonoBehaviour
 
     void Update()
     {
-        int GrowStatus = day - StartGrow;
-
-        if (GrowStatus < PlantStageImages.Count - 1)
+        GrowStatus = day - StartGrow;
+        if (GrowStatus < 0)
         {
-            PlantSprrite.sprite = PlantStageImages[GrowStatus];
+            Debug.Log("Plant " + CurrentPlant.name + " is to low destroying");
+            Destroy(CurrentPlant);
+        }
+
+        if (GrowStatus <= PlantStageAnimator.parameterCount - 1)
+        {
+            for (int i = 0; i < PlantStageAnimator.parameterCount - 1; i++)
+            {
+                PlantStageAnimator.SetBool("Stage" + i, false);
+            }
+
+            PlantStageAnimator.SetBool("Stage" + GrowStatus, true);
         }
         else
         {
-            GrowStatus = PlantStageImages.Count - 1;
-            PlantSprrite.sprite = PlantStageImages[PlantStageImages.Count - 1];
+            for (int i = 0; i < PlantStageAnimator.parameterCount - 1; i++)
+            {
+                PlantStageAnimator.SetBool("Stage" + i, false);
+            }
+            int s = PlantStageAnimator.parameterCount - 1;
+            PlantStageAnimator.SetBool("Stage" + s, true);
             IsDone = true;
         }
     }

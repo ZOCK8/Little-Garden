@@ -1,13 +1,13 @@
 fileFormatVersion: 2
-guid: 6a5f600ca74da2e4a82f40268c0f2fdd
+guid: 6e21ab3f15e5e5ab1b9ccbb2c8a18638
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -7523970955242101793
-    second: Lettuce_0
+      213: -740892554482542100
+    second: OrangePlantAdult (5)_0
   - first:
-      213: 4535925395531633388
-    second: Lettuce_1
+      213: -1613159009193121262
+    second: OrangePlantAdult (5)_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -40,7 +40,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 0
+    filterMode: 1
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -54,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 32
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -116,13 +116,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Lettuce_0
+      name: OrangePlantAdult (5)_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 2
-        width: 33
-        height: 26
+        x: 1
+        y: 0
+        width: 62
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -131,20 +131,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: fd32078a74c759790800000000000000
-      internalID: -7523970955242101793
+      spriteID: ce91659a522d7b5f0800000000000000
+      internalID: -740892554482542100
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Lettuce_1
+      name: OrangePlantAdult (5)_1
       rect:
         serializedVersion: 2
-        x: 31
-        y: 3
-        width: 33
-        height: 26
+        x: 65
+        y: 0
+        width: 62
+        height: 64
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ce216586d18d2fe30800000000000000
-      internalID: 4535925395531633388
+      spriteID: 21aa2d29d68ec99e0800000000000000
+      internalID: -1613159009193121262
       vertices: []
       indices: 
       edges: []
@@ -173,8 +173,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Lettuce_0: -7523970955242101793
-      Lettuce_1: 4535925395531633388
+      OrangePlantAdult (5)_0: -740892554482542100
+      OrangePlantAdult (5)_1: -1613159009193121262
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
