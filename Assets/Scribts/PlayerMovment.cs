@@ -122,6 +122,22 @@ public class PlayerMovment : MonoBehaviour
                 }
             }
         }
+        /////////////////////////////
+        /// Player Watering can system
+        /////////////////////////////
+        if (inventoryManger.CurrentItem.ItemName == "Watering can" && InputSystem.Player.Interact.WasPressedThisFrame())
+        {
+            for (int i = 0; i < PlantsContainer.transform.childCount; i++)
+            {
+                if (PlayerBc.IsTouching(PlantsContainer.transform.GetChild(i).GetComponent<BoxCollider2D>()))
+                {
+                    PlantsContainer.transform.GetChild(i).GetComponent<Plants>().WasWatered = true;
+                    Vector3Int PosTile = GardenTile.WorldToCell(PlantsContainer.transform.GetChild(i).transform.position);
+                    GardenTile.SetTile(PosTile, DirtPlantTile);
+                }
+            }
+        }
+
 
 
     }
