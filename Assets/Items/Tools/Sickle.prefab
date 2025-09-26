@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 6682290065349528600}
   - component: {fileID: 1858862514130093475}
   m_Layer: 0
-  m_Name: Flower
+  m_Name: Sickle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -80,7 +80,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 2
   m_Sprite: {fileID: 7482667652216324306, guid: 75f5f34dc1b5347e0b8351032682f224, type: 3}
-  m_Color: {r: 1, g: 0, b: 0.39479208, a: 1}
+  m_Color: {r: 1, g: 0.9333334, b: 0.5490196, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
