@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class NightDay : MonoBehaviour
 {
-    [SerializeField] public int day;
+    public int day;
     [SerializeField] private Tile DirtTile;
     [SerializeField] private GameObject NightUI;
     [SerializeField] private GameObject PlantsContainer;
@@ -27,32 +27,34 @@ public class NightDay : MonoBehaviour
     void Update()
     {
 
-
     }
     IEnumerator NightCooldown()
     {
-        NightUI.SetActive(false);
-        yield return new WaitForSeconds(300);
-        Debug.Log("Day Has Ended");
-        day += 1;
-        NightUI.SetActive(true);
+        while (true)
+        {
+            NightUI.SetActive(false);
+            EndDay = false;
+
+            yield return new WaitForSeconds(30); // Nachtdauer
+
+            NightUI.SetActive(true);
+            UpdatePlants();
+
+            yield return new WaitUntil(() => EndDay); // wartet auf Button
+        }
+    }
+
+    private void UpdatePlants()
+    {
         for (int i = 0; i < PlantsContainer.transform.childCount; i++)
         {
-            Vector3Int TilePos = GroundTileMap.WorldToCell(PlantsContainer.transform.GetChild(i).gameObject.transform.position);
+            var plant = PlantsContainer.transform.GetChild(i).GetComponent<Plants>();
+            Vector3Int TilePos = GroundTileMap.WorldToCell(plant.transform.position);
+            day += 1;
             GroundTileMap.SetTile(TilePos, DirtTile);
-            if (PlantsContainer.transform.GetChild(i).GetComponent<Plants>().WasWatered == false)
-            {
-                PlantsContainer.transform.GetChild(i).GetComponent<Plants>().GrowStatus -= 1;
-            }
-            else
-            {
-                PlantsContainer.transform.GetChild(i).GetComponent<Plants>().GrowStatus += 1;
-            }
+
+            plant.GrowStatus += plant.WasWatered ? 1 : -1;
         }
-        yield return new WaitUntil(() =>
-        {
-            EndDay = true;
-        });
-        StartCoroutine(NightCooldown());
     }
+
 }
