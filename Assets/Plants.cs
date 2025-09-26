@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -5,8 +6,7 @@ using UnityEngine;
 public class Plants : MonoBehaviour
 {
     private GameObject CurrentPlant;
-    [SerializeField] public int GrowStatus;
-    private int day;
+    public int GrowStatus = 0;
     [SerializeField] private int StartGrow;
     private Animator PlantStageAnimator;
 
@@ -23,24 +23,16 @@ public class Plants : MonoBehaviour
     void Start()
     {
         IsDone = false;
-        PlayerData data = SaveSystem.Load();
-        if (data != null)
-        {
-            day = data.Day;
-        }
-
         InputSystem = new InputSystem_Actions();
         PlantStageAnimator = this.gameObject.GetComponent<Animator>();
         CurrentPlant = this.gameObject;
-        GrowStatus = 0;
-        StartGrow = day;
         PlantSprrite = CurrentPlant.GetComponent<SpriteRenderer>();
         PlantBox = CurrentPlant.GetComponent<BoxCollider2D>();
+        WasWatered = true;
     }
 
     void Update()
     {
-        GrowStatus = day - StartGrow;
         if (GrowStatus < 0)
         {
             Debug.Log("Plant " + CurrentPlant.name + " is to low destroying");
