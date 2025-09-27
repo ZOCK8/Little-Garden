@@ -15,6 +15,6 @@ MonoBehaviour:
   ItemName: Orange
   ItemType: 1
   ObjectInHand: {fileID: 1522758291384081645, guid: c9547a87e123180faa0e5dfb2e45bbf7, type: 3}
-  SellPrice: 0
-  BuyPrice: 0
+  SellPrice: 4
+  BuyPrice: 6
   ShowcaseImage: {fileID: 3080355106376764048, guid: f5e7a167924be3d82bbb16e79cd0e60b, type: 3}

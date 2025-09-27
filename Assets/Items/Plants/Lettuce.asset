@@ -16,5 +16,5 @@ MonoBehaviour:
   ItemType: 1
   ObjectInHand: {fileID: 126908377205262943, guid: d47a822dac7e04434a260b91e99f60c0, type: 3}
   SellPrice: 0
-  BuyPrice: 0
+  BuyPrice: 2
   ShowcaseImage: {fileID: -5620285821616511929, guid: 6db5803647cf499a2ac529fa3d472451, type: 3}

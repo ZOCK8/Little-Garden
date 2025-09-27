@@ -13,6 +13,7 @@ public class InventoryManger : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseLeft;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseMiddle;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseRight;
+    public int Coins;
 
     private GameObject CurrentItemObject;
     void Start()
@@ -82,10 +83,12 @@ public class InventoryManger : MonoBehaviour
     }
     public void ClearCurrentItem()
     {
+        bool FoundItem = false;
         for (int i = 0; i < ItemsInInv.Count; i++)
         {
-            if (ItemsInInv[i].name == CurrentItem.name)
+            if (ItemsInInv[i].name == CurrentItem.name && !FoundItem)
             {
+                FoundItem = true;
                 ItemsInInv.Remove(ItemsInInv[i]);
             }
         }

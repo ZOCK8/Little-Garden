@@ -639,7 +639,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &168918189
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1788,7 +1788,7 @@ GameObject:
   - component: {fileID: 635151714}
   - component: {fileID: 635151716}
   m_Layer: 5
-  m_Name: seeds button
+  m_Name: Building button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2278,6 +2278,7 @@ MonoBehaviour:
   ItemShowcaseLeft: {fileID: 1495945532}
   ItemShowcaseMiddle: {fileID: 1806327736}
   ItemShowcaseRight: {fileID: 202642898}
+  Coins: 0
 --- !u!4 &820289166
 Transform:
   m_ObjectHideFlags: 0
@@ -3174,7 +3175,7 @@ RectTransform:
   m_Father: {fileID: 639102191}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4103,8 +4104,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 1695521641}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.4690318}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4828,17 +4829,20 @@ MonoBehaviour:
   ShopUiContent: {fileID: 2037110020}
   AllTools:
   - {fileID: 11400000, guid: 54d75748e59cb43f7a6f2efb92758b56, type: 2}
-  AllBuildings: []
-  AllPlantss:
+  - {fileID: 11400000, guid: 42498b4cbf75b9996997802c877707ed, type: 2}
+  - {fileID: 11400000, guid: a5332b30a965eb3249b02fb13ab152ad, type: 2}
+  AllBuildings:
+  - {fileID: 11400000, guid: 571e31fc420401b0a9b6a2f488582842, type: 2}
+  AllPlants:
   - {fileID: 11400000, guid: 7d2228b184da2817c92af45afba4361f, type: 2}
   - {fileID: 11400000, guid: 6c4bfc8ff96a6d80a8f28dcf4e0f5e76, type: 2}
   - {fileID: 11400000, guid: e4c6bf764454161a5ac97f085bf711e0, type: 2}
   - {fileID: 11400000, guid: 50fe785668d419357973f7ba75417a8d, type: 2}
   - {fileID: 11400000, guid: 4faaadef765eac3e4a5a9e0729c3dee8, type: 2}
   ToolsButton: {fileID: 1567668316}
-  SeedButton: {fileID: 635151716}
+  BuildingButton: {fileID: 635151716}
   PlantButton: {fileID: 1366804369}
-  ShopElement: {fileID: 0}
+  ShopElement: {fileID: 5986847948078730157, guid: 5366174d15eb740ec925b8571e6c036d, type: 3}
   inventoryManger: {fileID: 820289165}
 --- !u!61 &1456177480
 BoxCollider2D:
@@ -65055,9 +65059,9 @@ RectTransform:
   - {fileID: 1221282602}
   m_Father: {fileID: 2037110021}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 252.4701, y: -114.9999}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 504.9402, y: 229.9998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810585941
@@ -66944,7 +66948,7 @@ MonoBehaviour:
     m_Top: 0
     m_Bottom: 0
   m_ChildAlignment: 0
-  m_Spacing: -1100
+  m_Spacing: -400
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
