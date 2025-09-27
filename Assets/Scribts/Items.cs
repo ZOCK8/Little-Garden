@@ -5,7 +5,7 @@ public enum ItemTypeEnum
 {
     Tools,
     Plant,
-    Seed
+    Buildings
 }
 
 [CreateAssetMenu(fileName = "Items", menuName = "Scriptable Objects/Items")]

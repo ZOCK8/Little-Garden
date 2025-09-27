@@ -1,10 +1,22 @@
 fileFormatVersion: 2
-guid: e2056b39bc88a4f96b58bc0910c66aba
+guid: 1c3b640f76bb34da28fc681a2138f6e2
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 7208014375415968472
-    second: Scarecrow_0
+      213: 4909224581475693776
+    second: Shining Light_0
+  - first:
+      213: 3007502929281495506
+    second: Shining Light_1
+  - first:
+      213: -5235767342641816512
+    second: Shining Light_2
+  - first:
+      213: 158666324545892532
+    second: Shining Light_3
+  - first:
+      213: 5861417547512857704
+    second: Shining Light_4
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,23 +125,23 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Scarecrow_0
+      name: Shining Light_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 62
+        width: 128
+        height: 128
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 8d2f39e72e2080460800000000000000
-      internalID: 7208014375415968472
+      spriteID: 0d479752fb1112440800000000000000
+      internalID: 4909224581475693776
       vertices: []
       indices: 
       edges: []
@@ -138,7 +150,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -146,9 +158,11 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":128.0,"y":128.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":1,"keepEmptyRects":false,"isAlternate":false}'
     nameFileIdTable:
-      Scarecrow_0: 7208014375415968472
+      Shining Light_0: 4909224581475693776
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

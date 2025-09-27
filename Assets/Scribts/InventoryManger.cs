@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManger : MonoBehaviour
@@ -18,26 +19,35 @@ public class InventoryManger : MonoBehaviour
     {
         CheckItem();
     }
+    void Update()
+    {
+        if (CurrentItem == null)
+        {
+            CurrentItem = ItemsInInv[0];
+            CheckItem();
+        }
+
+    }
     public void NextItem()
     {
+
         CurrentItemInt += 1;
         if (CurrentItemInt >= ItemsInInv.Count)
         {
             CurrentItemInt = 0;
         }
         CurrentItem = ItemsInInv[CurrentItemInt];
-        UpdateShowcase();
         CheckItem();
     }
     public void LastItem()
     {
+
         CurrentItemInt -= 1;
         if (CurrentItemInt < 0)
         {
             CurrentItemInt = ItemsInInv.Count - 1;
         }
         CurrentItem = ItemsInInv[CurrentItemInt];
-        UpdateShowcase();
         CheckItem();
     }
 
@@ -45,19 +55,14 @@ public class InventoryManger : MonoBehaviour
     {
         for (int i = 0; i < ItemParent.transform.childCount; i++)
         {
-            Destroy(ItemParent.transform.GetChild(0).gameObject);
+            Destroy(ItemParent.transform.GetChild(i).gameObject);
         }
-        GameObject Item = Instantiate(CurrentItem.ObjectInHand);
-        Item.transform.parent = ItemParent.transform;
-        Item.name = CurrentItem.ItemName;
-        Item.transform.position = PlayerHand.position;
-        CurrentItemObject = Item;
+        ItemParent.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentItem.ShowcaseImage;
         UpdateShowcase();
     }
 
     void LateUpdate()
     {
-        CurrentItemObject.transform.position = PlayerHand.position;
     }
     public void UpdateShowcase()
     {
@@ -78,6 +83,22 @@ public class InventoryManger : MonoBehaviour
         ItemShowcaseLeft.sprite = ItemsInInv[Leftint].ShowcaseImage;
         ItemShowcaseMiddle.sprite = ItemsInInv[CurrentItemInt].ShowcaseImage;
         ItemShowcaseRight.sprite = ItemsInInv[Rightint].ShowcaseImage;
-
+    }
+    public void ClearCurrentItem()
+    {
+        for (int i = 0; i < ItemsInInv.Count; i++)
+        {
+            if (ItemsInInv[i].name == CurrentItem.name)
+            {
+                CurrentItem = null;
+                ItemsInInv.Remove(ItemsInInv[i]);
+                LastItem();
+            }
+            else
+            {
+                CurrentItem = null;
+                LastItem();
+            }
+        }
     }
 }

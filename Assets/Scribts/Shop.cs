@@ -10,7 +10,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject ShopUi;
     [SerializeField] private GameObject ShopUiContent;
     [SerializeField] private List<Items> AllTools;
-    [SerializeField] private List<Items> AllSeeds;
+    [SerializeField] private List<Items> AllBuildings;
     [SerializeField] private List<Items> AllPlantss;
 
     [SerializeField] private Button ToolsButton;
@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
         BuildShop();
 
         ToolsButton.onClick.AddListener(() => { Filter = "Tools"; ItemsCount = AllTools.Count; BuildShop(); });
-        SeedButton.onClick.AddListener(() => { Filter = "Seeds"; ItemsCount = AllSeeds.Count; BuildShop(); });
+        SeedButton.onClick.AddListener(() => { Filter = "Buildings"; ItemsCount = AllBuildings.Count; BuildShop(); });
         PlantButton.onClick.AddListener(() => { Filter = "Plants"; ItemsCount = AllPlantss.Count; BuildShop(); });
 
     }
@@ -110,13 +110,13 @@ public class Shop : MonoBehaviour
                         Element.transform.GetChild(3).gameObject.name = "" + s;
                     }
                     break;
-                case "Seeds":
-                    for (int s = 0; s < AllSeeds.Count; s++)
+                case "Buildings":
+                    for (int s = 0; s < AllBuildings.Count; s++)
                     {
                         Element.name = "BuyElement" + i;
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllSeeds[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllSeeds[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllSeeds[s].BuyPrice.ToString();
+                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllBuildings[s].ShowcaseImage;
+                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].name;
+                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].BuyPrice.ToString();
                         BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
                         Element.transform.GetChild(3).gameObject.name = "" + s;
 
@@ -134,12 +134,12 @@ public class Shop : MonoBehaviour
                     }
                     break;
                 default:
-                    for (int s = 0; s < AllSeeds.Count; s++)
+                    for (int s = 0; s < AllBuildings.Count; s++)
                     {
                         Element.name = "BuyElement" + i;
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllSeeds[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllSeeds[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllSeeds[s].BuyPrice.ToString();
+                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllBuildings[s].ShowcaseImage;
+                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].name;
+                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].BuyPrice.ToString();
                         BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
                         Element.transform.GetChild(3).gameObject.name = "" + s;
 
