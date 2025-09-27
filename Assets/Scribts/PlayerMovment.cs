@@ -11,6 +11,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private Tilemap GardenTile;
     [SerializeField] private RuleTile DirtTile;
     [SerializeField] private GameObject PlantsContainer;
+    [SerializeField] private GameObject BuildingContainer;
     private InputSystem_Actions InputSystem;
     private Rigidbody2D PlayerRb;
     private BoxCollider2D PlayerBc;
@@ -63,28 +64,42 @@ public class PlayerMovment : MonoBehaviour
         {
             inventoryManger.NextItem();
         }
-        //////////////////////
-        /// The Gras to farmland system
-
-        if (InputSystem.Player.Interact.WasPressedThisFrame())
+        /////////////////////////////
+        //// Scare Crow Placing System
+        /////////////////////////////
+        if (InputSystem.Player.Interact.WasPressedThisFrame() && PlayerRb.IsTouching(TCGarden) && inventoryManger.CurrentItem.name == "Scare crow")
         {
-            if (PlayerRb.IsTouching(TCGarden))
-            {
-                Debug.Log("is touching grass");
-                if (inventoryManger.CurrentItem.name == "Shovel")
-                {
-                    Debug.Log("tryig to estroy");
+            GameObject ScareCrow = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
+            Vector3 TilePos = GardenTile.WorldToCell(PlayerObject.transform.position) + new Vector3(0.5f, 0.7f, 0);
+            ScareCrow.transform.position = TilePos;
+            inventoryManger.ClearCurrentItem();
+            ScareCrow.transform.SetParent(BuildingContainer.transform);
+        }
+        
 
-                    Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
-                    TileBase tile = GardenTile.GetTile(TilePos);
-                    if (tile.name == "Grass")
+        //////////////////////
+            /// The Gras to farmland system
+            /////////////////////////////
+
+            if (InputSystem.Player.Interact.WasPressedThisFrame())
+            {
+                if (PlayerRb.IsTouching(TCGarden))
+                {
+                    Debug.Log("is touching grass");
+                    if (inventoryManger.CurrentItem.name == "Shovel")
                     {
-                        Debug.Log("Ther is dirt to destroy at: " + tile.name);
-                        GardenTile.SetTile(TilePos, DirtTile);
+                        Debug.Log("tryig to estroy");
+
+                        Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
+                        TileBase tile = GardenTile.GetTile(TilePos);
+                        if (tile.name == "Grass")
+                        {
+                            Debug.Log("Ther is dirt to destroy at: " + tile.name);
+                            GardenTile.SetTile(TilePos, DirtTile);
+                        }
                     }
                 }
             }
-        }
         /////////////////////////////
         ///  Player Planting System
         /////////////////////////////

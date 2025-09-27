@@ -10,10 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f5cff6b8ab709001cbe53a3562c2ad7f, type: 3}
-  m_Name: Flower 1
+  m_Name: Scare crow
   m_EditorClassIdentifier: Assembly-CSharp::Items
-  ItemName: Bush
-  ItemType: 1
-  ObjectInHand: {fileID: 6491832573616220257, guid: 86b8767e6f2a36a63b8e6077264102c3, type: 3}
-  SellPrice: 1
-  BuyPrice: 2
+  ItemName: Scare Crow
+  ItemType: 2
+  ObjectInHand: {fileID: 961678844458827915, guid: 2b228e5b6c90bd9f096b579a47c70379, type: 3}
+  SellPrice: 2
+  BuyPrice: 5
+  ShowcaseImage: {fileID: 7208014375415968472, guid: e2056b39bc88a4f96b58bc0910c66aba, type: 3}

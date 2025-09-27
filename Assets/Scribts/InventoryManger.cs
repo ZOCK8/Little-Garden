@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class InventoryManger : MonoBehaviour
@@ -17,6 +18,15 @@ public class InventoryManger : MonoBehaviour
     void Start()
     {
         CheckItem();
+    }
+    void Update()
+    {
+        if (CurrentItem == null)
+        {
+            CurrentItem = ItemsInInv[0];
+            CheckItem();
+        }
+
     }
     public void NextItem()
     {
@@ -79,5 +89,17 @@ public class InventoryManger : MonoBehaviour
         ItemShowcaseMiddle.sprite = ItemsInInv[CurrentItemInt].ShowcaseImage;
         ItemShowcaseRight.sprite = ItemsInInv[Rightint].ShowcaseImage;
 
+    }
+    public void ClearCurrentItem()
+    {
+        for (int i = 0; i < ItemsInInv.Count; i++)
+        {
+            if (ItemsInInv[i].name == CurrentItem.name)
+            {
+                ItemsInInv.Remove(ItemsInInv[i]);
+                CurrentItem = ItemsInInv[i - 1];
+                CheckItem();
+            }
+        }
     }
 }
