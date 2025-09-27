@@ -65,7 +65,7 @@ public class NightDay : MonoBehaviour
             EndDay = false;
 
 
-            yield return new WaitForSeconds(300); // Nachtdauer
+            yield return new WaitForSeconds(30); // Nachtdauer
             /////////////////////////
             /// Night time
             ///////////////////////// 
@@ -120,7 +120,7 @@ public class NightDay : MonoBehaviour
         for (int i = 0; i < PlantsContainer.transform.childCount; i++)
         {
             var plant = PlantsContainer.transform.GetChild(i).GetComponent<Plants>();
-            Vector3Int TilePos = GroundTileMap.WorldToCell(plant.transform.position);
+            Vector3Int TilePos = GroundTileMap.WorldToCell(plant.transform.position - new Vector3(0.5f, 0.7f, 0));
             day += 1;
             GroundTileMap.SetColor(TilePos, Color.white);
             plant.GrowStatus += plant.WasWatered ? 1 : -1;

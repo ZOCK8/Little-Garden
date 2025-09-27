@@ -1,9 +1,11 @@
 using System;
 using NUnit.Framework.Internal.Commands;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.UI;
 
 public class PlayerMovment : MonoBehaviour
 {
@@ -12,6 +14,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private RuleTile DirtTile;
     [SerializeField] private GameObject PlantsContainer;
     [SerializeField] private GameObject BuildingContainer;
+    [SerializeField] private GameObject AddItemAnimator;
     private InputSystem_Actions InputSystem;
     private Rigidbody2D PlayerRb;
     private BoxCollider2D PlayerBc;
@@ -109,6 +112,8 @@ public class PlayerMovment : MonoBehaviour
             Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.7f, 0);
             PlantingPos = cellCenterPos;
             bool alreadyUsed = false;
+            GameObject Plant = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
+            inventoryManger.ClearCurrentItem();
             for (int i = 0; i < PlantsContainer.transform.childCount; i++)
             {
                 if (PlantsContainer.transform.GetChild(i).position == cellCenterPos)
@@ -121,7 +126,7 @@ public class PlayerMovment : MonoBehaviour
             if (!alreadyUsed && GardenTile.GetTile(TilePos)?.name == "FarmLand")
             {
                 Debug.Log("Planting Plant");
-                Planting();
+                Planting(Plant);
             }
 
 
@@ -135,7 +140,17 @@ public class PlayerMovment : MonoBehaviour
             {
                 if (PlayerBc.IsTouching(PlantsContainer.transform.GetChild(i).GetComponent<BoxCollider2D>()))
                 {
-                    DestroyPlant(PlantsContainer.transform.GetChild(i).gameObject);
+                    var Plant = PlantsContainer.transform.GetChild(i).gameObject;
+                    if (Plant.GetComponent<Plants>().IsDone)
+                    {
+                        AddItemAnimator.GetComponent<Animator>().SetTrigger("AddItem");
+                        AddItemAnimator.transform.GetChild(0).GetComponent<Image>().sprite = Plant.GetComponent<Plants>().items.ShowcaseImage;
+                        AddItemAnimator.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = "+";
+                        AddItemAnimator.transform.GetChild(1).GetComponent<TextMeshProUGUI>().color = Color.green;
+
+                        inventoryManger.ItemsInInv.Add(Plant.GetComponent<Plants>().items);
+                    }
+                    DestroyPlant(Plant);
                 }
             }
         }
@@ -158,9 +173,8 @@ public class PlayerMovment : MonoBehaviour
 
 
     }
-    public void Planting()
+    public void Planting(GameObject PlantingPlant)
     {
-        GameObject PlantingPlant = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
         Vector3Int tilepos = GardenTile.WorldToCell(PlantingPos);
         GardenTile.SetColor(tilepos, Color.antiqueWhite);
         PlantingPlant.transform.position = PlantingPos;
@@ -173,7 +187,6 @@ public class PlayerMovment : MonoBehaviour
             Debug.LogError("The current Item has not Items Pleas add!");
         }
         PlantingPlant.transform.SetParent(PlantsContainer.transform);
-
     }
     public void DestroyPlant(GameObject PlantToDestroy)
     {
