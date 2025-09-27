@@ -61,55 +61,55 @@ public class PlayerMovment : MonoBehaviour
 
         if (scroll < 0)
         {
-            inventoryManger.LastItem();
+            inventoryManger.NextItem();
         }
         if (scroll > 0)
         {
-            inventoryManger.NextItem();
+            inventoryManger.LastItem();
         }
         /////////////////////////////
         //// Scare Crow Placing System
         /////////////////////////////
-        if (InputSystem.Player.Interact.WasPressedThisFrame() && PlayerRb.IsTouching(TCGarden) && inventoryManger.CurrentItem.name == "Scare crow")
+        if (InputSystem.Player.Interact.WasPressedThisFrame() && PlayerRb.IsTouching(TCGarden) && inventoryManger.CurrentItem.name == "Scare Crow")
         {
             GameObject ScareCrow = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
             Vector3 TilePos = GardenTile.WorldToCell(PlayerObject.transform.position) + new Vector3(0.5f, 0.7f, 0);
             ScareCrow.transform.position = TilePos;
-            inventoryManger.ClearCurrentItem();
             ScareCrow.transform.SetParent(BuildingContainer.transform);
+            inventoryManger.ClearCurrentItem();
         }
-        
+
 
         //////////////////////
-            /// The Gras to farmland system
-            /////////////////////////////
+        /// The Gras to farmland system
+        /////////////////////////////
 
-            if (InputSystem.Player.Interact.WasPressedThisFrame())
+        if (InputSystem.Player.Interact.WasPressedThisFrame())
+        {
+            if (PlayerRb.IsTouching(TCGarden))
             {
-                if (PlayerRb.IsTouching(TCGarden))
+                Debug.Log("is touching grass");
+                if (inventoryManger.CurrentItem.name == "Shovel")
                 {
-                    Debug.Log("is touching grass");
-                    if (inventoryManger.CurrentItem.name == "Shovel")
-                    {
-                        Debug.Log("tryig to estroy");
+                    Debug.Log("tryig to estroy");
 
-                        Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
-                        TileBase tile = GardenTile.GetTile(TilePos);
-                        if (tile.name == "Grass")
-                        {
-                            Debug.Log("Ther is dirt to destroy at: " + tile.name);
-                            GardenTile.SetTile(TilePos, DirtTile);
-                        }
+                    Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
+                    TileBase tile = GardenTile.GetTile(TilePos);
+                    if (tile.name == "Grass")
+                    {
+                        Debug.Log("Ther is dirt to destroy at: " + tile.name);
+                        GardenTile.SetTile(TilePos, DirtTile);
                     }
                 }
             }
+        }
         /////////////////////////////
         ///  Player Planting System
         /////////////////////////////
         if (InputSystem.Player.Interact.WasPressedThisFrame() && inventoryManger.CurrentItem.ItemType == ItemTypeEnum.Plant && PlayerRb.IsTouching(TCGarden))
         {
             Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
-            Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.7f, 0);
+            Vector3 cellCenterPos = TilePos + new Vector3(0.5f, 0.95f, 0);
             PlantingPos = cellCenterPos;
             bool alreadyUsed = false;
             GameObject Plant = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
@@ -165,7 +165,7 @@ public class PlayerMovment : MonoBehaviour
                 {
                     PlantsContainer.transform.GetChild(i).GetComponent<Plants>().WasWatered = true;
                     Vector3Int PosTile = GardenTile.WorldToCell(PlantsContainer.transform.GetChild(i).transform.position);
-                    GardenTile.SetColor(PosTile, Color.antiqueWhite);
+                    GardenTile.SetColor(PosTile, Color.navajoWhite);
                 }
             }
         }
@@ -176,7 +176,7 @@ public class PlayerMovment : MonoBehaviour
     public void Planting(GameObject PlantingPlant)
     {
         Vector3Int tilepos = GardenTile.WorldToCell(PlantingPos);
-        GardenTile.SetColor(tilepos, Color.antiqueWhite);
+        GardenTile.SetColor(tilepos, Color.navajoWhite);
         PlantingPlant.transform.position = PlantingPos;
         if (PlantingPlant.GetComponent<Plants>().items == null)
         {

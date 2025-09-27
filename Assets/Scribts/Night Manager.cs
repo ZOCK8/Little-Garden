@@ -65,7 +65,7 @@ public class NightDay : MonoBehaviour
             EndDay = false;
 
 
-            yield return new WaitForSeconds(30); // Nachtdauer
+            yield return new WaitForSeconds(300); // Nachtdauer
             /////////////////////////
             /// Night time
             ///////////////////////// 

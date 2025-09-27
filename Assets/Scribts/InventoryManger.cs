@@ -53,10 +53,6 @@ public class InventoryManger : MonoBehaviour
 
     void CheckItem()
     {
-        for (int i = 0; i < ItemParent.transform.childCount; i++)
-        {
-            Destroy(ItemParent.transform.GetChild(i).gameObject);
-        }
         ItemParent.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentItem.ShowcaseImage;
         UpdateShowcase();
     }
@@ -90,15 +86,9 @@ public class InventoryManger : MonoBehaviour
         {
             if (ItemsInInv[i].name == CurrentItem.name)
             {
-                CurrentItem = null;
                 ItemsInInv.Remove(ItemsInInv[i]);
-                LastItem();
-            }
-            else
-            {
-                CurrentItem = null;
-                LastItem();
             }
         }
+        LastItem();
     }
 }
