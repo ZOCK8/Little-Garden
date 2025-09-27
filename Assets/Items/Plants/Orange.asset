@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5cff6b8ab709001cbe53a3562c2ad7f, type: 3}
+  m_Name: Orange
+  m_EditorClassIdentifier: Assembly-CSharp::Items
+  ItemName: Orange
+  ItemType: 1
+  ObjectInHand: {fileID: 1522758291384081645, guid: c9547a87e123180faa0e5dfb2e45bbf7, type: 3}
+  SellPrice: 4
+  BuyPrice: 6
+  ShowcaseImage: {fileID: 3080355106376764048, guid: f5e7a167924be3d82bbb16e79cd0e60b, type: 3}

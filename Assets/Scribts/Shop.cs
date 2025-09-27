@@ -11,142 +11,129 @@ public class Shop : MonoBehaviour
     [SerializeField] private GameObject ShopUiContent;
     [SerializeField] private List<Items> AllTools;
     [SerializeField] private List<Items> AllBuildings;
-    [SerializeField] private List<Items> AllPlantss;
+    [SerializeField] private List<Items> AllPlants;
 
     [SerializeField] private Button ToolsButton;
-    [SerializeField] private Button SeedButton;
+    [SerializeField] private Button BuildingButton;
     [SerializeField] private Button PlantButton;
     [SerializeField] private GameObject ShopElement;
     private string Filter;
-    private int ItemsCount;
 
     private BoxCollider2D PlayerBoxCollider;
     private BoxCollider2D ShopBoxCollider;
-    private List<Button> BuyButtons;
+    private List<Button> BuyButtons = new List<Button>();
     [SerializeField] private InventoryManger inventoryManger;
+
     void Start()
     {
         Filter = "Tools";
         ShopUi.SetActive(false);
+
         ShopBoxCollider = ShopObject.GetComponent<BoxCollider2D>();
         PlayerBoxCollider = PlayerObject.GetComponent<BoxCollider2D>();
+
         BuildShop();
 
-        ToolsButton.onClick.AddListener(() => { Filter = "Tools"; ItemsCount = AllTools.Count; BuildShop(); });
-        SeedButton.onClick.AddListener(() => { Filter = "Buildings"; ItemsCount = AllBuildings.Count; BuildShop(); });
-        PlantButton.onClick.AddListener(() => { Filter = "Plants"; ItemsCount = AllPlantss.Count; BuildShop(); });
-
+        ToolsButton.onClick.AddListener(() => { Filter = "Tools"; BuildShop(); });
+        BuildingButton.onClick.AddListener(() => { Filter = "Buildings"; BuildShop(); });
+        PlantButton.onClick.AddListener(() => { Filter = "Plants"; BuildShop(); });
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (PlayerBoxCollider.IsTouching(ShopBoxCollider))
-        {
-            ShopUi.SetActive(true);
-        }
-        else
-        {
-            ShopUi.SetActive(false);
-        }
-        if (BuyButtons != null)
-        {
-            for (int i = 0; i < BuyButtons.Count; i++)
-            {
-                BuyButtons[i].onClick.AddListener(() =>
-                {
-                    int index;
-                    switch (Filter)
-                    {
-                        case "Tools":
-                            index = int.Parse(BuyButtons[i].name);
-                            inventoryManger.ItemsInInv.Add(AllTools[index]);
-                            break;
-                        case "Seeds":
-                            index = int.Parse(BuyButtons[i].name);
-                            inventoryManger.ItemsInInv.Add(AllTools[index]);
-                            break;
-                        case "Plants":
-                            index = int.Parse(BuyButtons[i].name);
-                            inventoryManger.ItemsInInv.Add(AllTools[index]);
-                            break;
-
-                    }
-                });
-            }
-        }
+        ShopUi.SetActive(PlayerBoxCollider.IsTouching(ShopBoxCollider));
     }
+    public void CheckItemShop(string Name)
+    {
+        Items BuyItems = AllTools[0];
+        switch (Filter)
+        {
+            case "Tools":
+                for (int i = 0; i < AllTools.Count; i++)
+                {
+                    if (Name == AllTools[i].name)
+                    {
+                        BuyItems = AllPlants[i];
+                    }
+                }
+                break;
+            case "Buildings":
+                for (int i = 0; i < AllBuildings.Count; i++)
+                {
+                    if (Name == AllBuildings[i].name)
+                    {
+                        BuyItems = AllPlants[i];
+                    }
+                }
+                break;
+            case "Plants":
+                for (int i = 0; i < AllPlants.Count; i++)
+                {
+                    if (Name == AllPlants[i].name)
+                    {
+                        BuyItems = AllPlants[i];
+                    }
+                }
+                break;
+
+        }
+        BuyItem(BuyItems);
+    }
+    public void BuyItem(Items item)
+    {
+        if (inventoryManger.Coins >= item.BuyPrice)
+        {
+            inventoryManger.Coins -= item.BuyPrice;
+            inventoryManger.ItemsInInv.Add(item);
+            inventoryManger.CurrentItem = item;
+            inventoryManger.UpdateShowcase();
+        }
+
+    }
+
     public void BuildShop()
     {
-        if (BuyButtons != null)
+        // Buttons resetten
+        BuyButtons.Clear();
+
+        // Vorherige Elemente löschen
+        foreach (Transform child in ShopUiContent.transform)
         {
-            BuyButtons.Clear();
-        }
-        Debug.Log("Building Shop");
-        for (int i = ShopUiContent.transform.childCount - 1; i >= 0; i--)
-        {
-            Destroy(ShopUiContent.transform.GetChild(i).gameObject);
+            Destroy(child.gameObject);
         }
 
-        for (int i = 0; i < ItemsCount; i++)
+        // Richtige Liste holen
+        List<Items> currentList = new List<Items>();
+        switch (Filter)
         {
+            case "Tools": currentList = AllTools; break;
+            case "Buildings": currentList = AllBuildings; break;
+            case "Plants": currentList = AllPlants; break;
+        }
+
+        // Elemente erstellen
+        for (int i = 0; i < currentList.Count; i++)
+        {
+            Items item = currentList[i];
+
             GameObject newElement = Instantiate(ShopElement, ShopUiContent.transform);
             newElement.name = "BuyElement_" + i;
-        }
 
+            newElement.transform.GetChild(0).GetComponent<Image>().sprite = item.ShowcaseImage;
+            newElement.transform.GetChild(1).GetComponent<TextMeshProUGUI>().text = item.name;
+            newElement.transform.GetChild(2).GetComponent<TextMeshProUGUI>().text = item.BuyPrice.ToString();
 
-        for (int i = 0; i < ShopUiContent.transform.childCount; i++)
-        {
-            GameObject Element = ShopUiContent.transform.GetChild(i).gameObject;
-            switch (Filter)
+            Button buyButton = newElement.transform.GetChild(3).GetComponent<Button>();
+            buyButton.name = i.ToString();
+
+            int index = i; // Lokale Kopie für Lambda
+            buyButton.onClick.AddListener(() =>
             {
-                case "Tools":
-                    for (int s = 0; s < AllTools.Count; s++)
-                    {
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllTools[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllTools[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllTools[s].BuyPrice.ToString();
-                        BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
-                        Element.transform.GetChild(3).gameObject.name = "" + s;
-                    }
-                    break;
-                case "Buildings":
-                    for (int s = 0; s < AllBuildings.Count; s++)
-                    {
-                        Element.name = "BuyElement" + i;
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllBuildings[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].BuyPrice.ToString();
-                        BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
-                        Element.transform.GetChild(3).gameObject.name = "" + s;
+                inventoryManger.ItemsInInv.Add(currentList[index]);
+                CheckItemShop(currentList[index].name);
+            });
 
-                    }
-                    break;
-                case "Plants":
-                    for (int s = 0; s < AllPlantss.Count; s++)
-                    {
-                        Element.name = "BuyElement" + i;
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllPlantss[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllPlantss[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllPlantss[s].BuyPrice.ToString();
-                        BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
-                        Element.transform.GetChild(3).gameObject.name = "" + s;
-                    }
-                    break;
-                default:
-                    for (int s = 0; s < AllBuildings.Count; s++)
-                    {
-                        Element.name = "BuyElement" + i;
-                        Element.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = AllBuildings[s].ShowcaseImage;
-                        Element.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].name;
-                        Element.transform.GetChild(2).gameObject.GetComponent<TextMeshProUGUI>().text = AllBuildings[s].BuyPrice.ToString();
-                        BuyButtons.Add(Element.transform.GetChild(3).gameObject.GetComponent<Button>());
-                        Element.transform.GetChild(3).gameObject.name = "" + s;
-
-                    }
-                    break;
-            }
-
+            BuyButtons.Add(buyButton);
         }
     }
 }

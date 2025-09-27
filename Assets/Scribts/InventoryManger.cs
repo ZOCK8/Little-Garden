@@ -13,6 +13,7 @@ public class InventoryManger : MonoBehaviour
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseLeft;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseMiddle;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseRight;
+    public int Coins;
 
     private GameObject CurrentItemObject;
     void Start()
@@ -53,10 +54,6 @@ public class InventoryManger : MonoBehaviour
 
     void CheckItem()
     {
-        for (int i = 0; i < ItemParent.transform.childCount; i++)
-        {
-            Destroy(ItemParent.transform.GetChild(i).gameObject);
-        }
         ItemParent.transform.GetChild(0).GetComponent<SpriteRenderer>().sprite = CurrentItem.ShowcaseImage;
         UpdateShowcase();
     }
@@ -86,19 +83,15 @@ public class InventoryManger : MonoBehaviour
     }
     public void ClearCurrentItem()
     {
+        bool FoundItem = false;
         for (int i = 0; i < ItemsInInv.Count; i++)
         {
-            if (ItemsInInv[i].name == CurrentItem.name)
+            if (ItemsInInv[i].name == CurrentItem.name && !FoundItem)
             {
-                CurrentItem = null;
+                FoundItem = true;
                 ItemsInInv.Remove(ItemsInInv[i]);
-                LastItem();
-            }
-            else
-            {
-                CurrentItem = null;
-                LastItem();
             }
         }
+        LastItem();
     }
 }

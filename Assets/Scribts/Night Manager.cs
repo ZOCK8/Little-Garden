@@ -49,7 +49,7 @@ public class NightDay : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GlobalLight.intensity = TimeLight / 2;
+        GlobalLight.intensity = TimeLight ;
 
         for (int i = 0; i < Lights.Count; i++)
         {
@@ -65,7 +65,7 @@ public class NightDay : MonoBehaviour
             EndDay = false;
 
 
-            yield return new WaitForSeconds(30); // Nachtdauer
+            yield return new WaitForSeconds(300); // Nachtdauer
             /////////////////////////
             /// Night time
             ///////////////////////// 
