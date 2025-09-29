@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Rendering.Universal;
@@ -20,10 +21,17 @@ public class NightDay : MonoBehaviour
     [SerializeField][Range(0, 100)] private int CrowEvent;
     [SerializeField][Range(0, 100)] private int DesertEvent;
     [SerializeField][Range(0, 100)] private int ThiefEvent;
+    [SerializeField] private TextMeshProUGUI DayText;
+    [SerializeField] private TextMeshProUGUI MoneyEarnedText;
+    [SerializeField] private TextMeshProUGUI PlantsHarvestedText;
+
     [SerializeField] private Light2D GlobalLight;
     [SerializeField] private List<Light2D> Lights;
     [Range(0, 1)] public float TimeLight;
     private bool DayIsOn;
+    [SerializeField] public int Day;
+    [SerializeField] public int MoneyEarned;
+    [SerializeField] public int PlantsHarvested;
 
     private bool EndDay;
     private float t;
@@ -33,6 +41,8 @@ public class NightDay : MonoBehaviour
         CrowEvent = 100;
         DesertEvent = 100;
         ThiefEvent = 100;
+
+        Day = 0;
 
         DayIsOn = true;
 
@@ -70,6 +80,11 @@ public class NightDay : MonoBehaviour
             /// Night time
             ///////////////////////// 
             DayIsOn = false;
+            Day += 1;
+            DayText.text = Day.ToString();
+            MoneyEarnedText.text = MoneyEarned.ToString();
+            PlantsHarvestedText.text = PlantsHarvested.ToString();
+
             NightUI.SetActive(true);
             UpdatePlants();
             int Highest;
@@ -106,6 +121,8 @@ public class NightDay : MonoBehaviour
             }
 
             yield return new WaitUntil(() => EndDay); // wartet auf Button
+            PlantsHarvested = 0;
+            MoneyEarned = 0;
             TimeLight = 0;
             CrowEvent = 100;
             DesertEvent = 100;

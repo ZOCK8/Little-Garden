@@ -17,5 +17,7 @@ public class Items : ScriptableObject
     public int SellPrice;
     public int BuyPrice;
     public Sprite ShowcaseImage;
+    public Sprite GrownItem;
+    public bool IsDoneGrowing = false;
     
 }

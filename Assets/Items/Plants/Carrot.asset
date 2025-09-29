@@ -15,6 +15,8 @@ MonoBehaviour:
   ItemName: Carrot
   ItemType: 1
   ObjectInHand: {fileID: 728716186248284909, guid: 86ddeb68af21bc0d7898d5e260a37f6c, type: 3}
-  SellPrice: 0
-  BuyPrice: 1
+  SellPrice: 3
+  BuyPrice: 3
   ShowcaseImage: {fileID: 6718816339643664956, guid: a440388e7c8cc4dcd85f65dd6fe9b773, type: 3}
+  GrownItem: {fileID: -5859083586626064994, guid: 843b02d1074ff1225b007f7cd0984785, type: 3}
+  IsDoneGrowing: 0

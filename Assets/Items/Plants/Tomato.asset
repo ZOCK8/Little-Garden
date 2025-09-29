@@ -15,6 +15,8 @@ MonoBehaviour:
   ItemName: Tomato
   ItemType: 1
   ObjectInHand: {fileID: 6491832573616220257, guid: 86b8767e6f2a36a63b8e6077264102c3, type: 3}
-  SellPrice: 1
-  BuyPrice: 2
+  SellPrice: 4
+  BuyPrice: 4
   ShowcaseImage: {fileID: -71035569445450909, guid: 29c119776ef543533985e3b1f43f85d2, type: 3}
+  GrownItem: {fileID: -8113185096396602001, guid: 2ff48a975329d694b8df58089668ccf9, type: 3}
+  IsDoneGrowing: 0

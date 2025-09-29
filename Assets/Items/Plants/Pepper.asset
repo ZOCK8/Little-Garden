@@ -15,6 +15,8 @@ MonoBehaviour:
   ItemName: Pepper
   ItemType: 1
   ObjectInHand: {fileID: 2160895042132370576, guid: fcdc25abd5842f1cd84a2382e1ab6edb, type: 3}
-  SellPrice: 4
+  SellPrice: 3
   BuyPrice: 3
   ShowcaseImage: {fileID: -1816737668651406034, guid: d0147ca2e21cd46888da8cfd218362b8, type: 3}
+  GrownItem: {fileID: -7667353464429452976, guid: 02cf90d634e99b3979039dd1c1e69e39, type: 3}
+  IsDoneGrowing: 0
