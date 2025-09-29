@@ -8,7 +8,7 @@ public class InventoryManger : MonoBehaviour
 
     public Items CurrentItem;
     private int CurrentItemInt;
-    [SerializeField] private GameObject ItemParent;
+    [SerializeField] public GameObject ItemParent;
     [SerializeField] private Transform PlayerHand;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseLeft;
     [SerializeField] private UnityEngine.UI.Image ItemShowcaseMiddle;
@@ -19,14 +19,20 @@ public class InventoryManger : MonoBehaviour
     void Start()
     {
         CheckItem();
+
     }
     void Update()
     {
-        if (CurrentItem == null)
+        if (CurrentItem == null && ItemsInInv != null)
         {
             CurrentItem = ItemsInInv[0];
             CheckItem();
         }
+        if (ItemsInInv == null || ItemsInInv.Count == 0)
+        {
+            CurrentItem = null;
+        }
+
 
     }
     public void NextItem()
@@ -49,6 +55,7 @@ public class InventoryManger : MonoBehaviour
             CurrentItemInt = ItemsInInv.Count - 1;
         }
         CurrentItem = ItemsInInv[CurrentItemInt];
+
         CheckItem();
     }
 

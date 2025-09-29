@@ -18,3 +18,5 @@ MonoBehaviour:
   SellPrice: 2
   BuyPrice: 5
   ShowcaseImage: {fileID: 7208014375415968472, guid: e2056b39bc88a4f96b58bc0910c66aba, type: 3}
+  GrownItem: {fileID: 0}
+  IsDoneGrowing: 0

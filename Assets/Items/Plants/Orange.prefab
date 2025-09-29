@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 9008156347236265073}
   - component: {fileID: 2024878579891413153}
   - component: {fileID: 8462039434200440816}
+  - component: {fileID: 8598999286451301763}
   m_Layer: 0
   m_Name: Orange
   m_TagString: Untagged
@@ -109,7 +110,7 @@ MonoBehaviour:
   StartGrow: 0
   IsDone: 0
   WasWatered: 0
-  items: {fileID: 0}
+  items: {fileID: 11400000, guid: e4c6bf764454161a5ac97f085bf711e0, type: 2}
 --- !u!61 &2024878579891413153
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -178,3 +179,56 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &8598999286451301763
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522758291384081645}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7db70e0ea77f5ac47a8f4565a9406397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.RenderPipelines.Universal.2D.Runtime::UnityEngine.Rendering.Universal.ShadowCaster2D
+  m_ShadowGroup: 0
+  m_Priority: 7
+  m_ComponentVersion: 5
+  m_HasRenderer: 1
+  m_UseRendererSilhouette: 1
+  m_CastsShadows: 1
+  m_SelfShadows: 0
+  m_AlphaCutoff: 0.1
+  m_ApplyToSortingLayers: 00000000b19d2cdce9e5a705
+  m_ShapePath:
+  - {x: -0.5, y: -0.625, z: 0}
+  - {x: -0.5, y: 0.625, z: 0}
+  - {x: 0.49999988, y: 0.625, z: 0}
+  - {x: 0.49999988, y: -0.625, z: 0}
+  m_ShapePathHash: 0
+  m_InstanceId: 0
+  m_ShadowShape2DComponent: {fileID: 3718613557018788921}
+  m_ShadowShape2DProvider:
+    rid: 6426816558191346183
+  m_ShadowCastingSource: 2
+  m_ShadowMesh:
+    m_Mesh: {fileID: 0}
+    m_LocalBounds:
+      m_Center: {x: 0, y: -0.0625, z: 0}
+      m_Extent: {x: 0.41874695, y: 0.51249695, z: 0}
+    m_EdgeProcessing: 1
+    m_TrimEdge: 0.05
+    m_FlipX: 0
+    m_FlipY: 0
+    m_InitialTrim: 0.05
+  m_CastingOption: 1
+  m_PreviousTrimEdge: 0.05
+  m_PreviousEdgeProcessing: 1
+  m_PreviousShadowCastingSource: 2
+  m_PreviousShadowShape2DSource: {fileID: 3718613557018788921}
+  references:
+    version: 2
+    RefIds:
+    - rid: 6426816558191346183
+      type: {class: ShadowShape2DProvider_SpriteRenderer, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.2D.Runtime}
+      data: 

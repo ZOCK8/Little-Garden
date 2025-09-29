@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -11,6 +12,12 @@ public class ViligerScrbt : MonoBehaviour
     [SerializeField] private List<Transform> WalkToPoints;
     [SerializeField] private GameObject SellUI;
     [SerializeField] private Button CloseSellUI;
+    [SerializeField] private Image ItemDisplay;
+    [SerializeField] private TextMeshProUGUI SellPrice;
+    [SerializeField] private Button SellButton;
+    [SerializeField] private InventoryManger inventoryManger;
+    [SerializeField] private DialogText dialogText;
+
     private InputSystem_Actions InputSystem;
 
     private Dictionary<NavMeshAgent, bool> isWaiting = new Dictionary<NavMeshAgent, bool>();
@@ -40,6 +47,17 @@ public class ViligerScrbt : MonoBehaviour
             }
             SellUI.SetActive(false);
         });
+
+        SellButton.onClick.AddListener(() =>
+        {
+            inventoryManger.Coins += inventoryManger.CurrentItem.SellPrice;
+            inventoryManger.ClearCurrentItem();
+            SellUI.SetActive(false);
+            dialogText.TextToDisplay = "You have successfully sold an item";
+            dialogText.Text.color = Color.black;
+            StartCoroutine(dialogText.ShowText());
+
+        });
     }
 
     void Update()
@@ -56,6 +74,8 @@ public class ViligerScrbt : MonoBehaviour
                 SellUI.SetActive(true);
                 villager.enabled = false;
             }
+            ItemDisplay.sprite = inventoryManger.CurrentItem.ShowcaseImage;
+            SellPrice.text = inventoryManger.CurrentItem.SellPrice.ToString();
 
 
             if (villager == null) continue;

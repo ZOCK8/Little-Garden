@@ -18,24 +18,27 @@ MonoBehaviour:
         serializedData:
         - key: 0
           value:
-            rid: 6426816531023003834
+            rid: 6426816559133229056
         - key: 1
           value:
-            rid: 6426816531023003835
+            rid: 6426816559133229057
         - key: 2
           value:
-            rid: 6426816531023003836
+            rid: 6426816559133229058
       lastMaterialMappings:
         serializedData:
         - key: Universal Render Pipeline/Lit
           value:
-            rid: 6426816506223657445
+            rid: 6426816555677122577
+        - key: Invalid
+          value:
+            rid: 6426816555677122578
       previewSettings:
         sizeFactor: 1
   references:
     version: 2
     RefIds:
-    - rid: 6426816506223657445
+    - rid: 6426816555677122577
       type: {class: 'SerializableDictionary`2[[Unity.AI.Material.Services.Stores.States.MapType, Unity.AI.Material],[System.String, mscorlib]]', ns: Unity.AI.Generators.Redux.Toolkit, asm: Unity.AI.Generators.Redux}
       data:
         serializedData:
@@ -61,15 +64,41 @@ MonoBehaviour:
           value: _MetallicGlossMap
         - key: 11
           value: None
-    - rid: 6426816531023003834
+    - rid: 6426816555677122578
+      type: {class: 'SerializableDictionary`2[[Unity.AI.Material.Services.Stores.States.MapType, Unity.AI.Material],[System.String, mscorlib]]', ns: Unity.AI.Generators.Redux.Toolkit, asm: Unity.AI.Generators.Redux}
+      data:
+        serializedData:
+        - key: 1
+          value: None
+        - key: 2
+          value: None
+        - key: 3
+          value: None
+        - key: 4
+          value: None
+        - key: 5
+          value: None
+        - key: 6
+          value: None
+        - key: 7
+          value: None
+        - key: 8
+          value: None
+        - key: 9
+          value: None
+        - key: 10
+          value: None
+        - key: 11
+          value: None
+    - rid: 6426816559133229056
       type: {class: ModelSelection, ns: Unity.AI.Material.Services.Stores.States, asm: Unity.AI.Material}
       data:
         modelID: 575ecf67-4425-4939-97b9-5e138b8ee234
-    - rid: 6426816531023003835
+    - rid: 6426816559133229057
       type: {class: ModelSelection, ns: Unity.AI.Material.Services.Stores.States, asm: Unity.AI.Material}
       data:
         modelID: 
-    - rid: 6426816531023003836
+    - rid: 6426816559133229058
       type: {class: ModelSelection, ns: Unity.AI.Material.Services.Stores.States, asm: Unity.AI.Material}
       data:
         modelID: 
