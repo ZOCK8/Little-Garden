@@ -17,6 +17,7 @@ public class ViligerScrbt : MonoBehaviour
     [SerializeField] private Button SellButton;
     [SerializeField] private InventoryManger inventoryManger;
     [SerializeField] private DialogText dialogText;
+    [SerializeField] private NightDay nightDay;
 
     private InputSystem_Actions InputSystem;
 
@@ -51,6 +52,7 @@ public class ViligerScrbt : MonoBehaviour
         SellButton.onClick.AddListener(() =>
         {
             inventoryManger.Coins += inventoryManger.CurrentItem.SellPrice;
+            nightDay.MoneyEarned += inventoryManger.CurrentItem.SellPrice;
             inventoryManger.ClearCurrentItem();
             SellUI.SetActive(false);
             dialogText.TextToDisplay = "You have successfully sold an item";
@@ -71,6 +73,7 @@ public class ViligerScrbt : MonoBehaviour
 
             if (InputSystem.Player.Interact.WasPressedThisFrame() && ViligerParent.transform.GetChild(i).GetComponent<Collider2D>().IsTouching(Player))
             {
+                ViligerParent.transform.GetChild(i).GetComponent<AudioSource>().Play();
                 SellUI.SetActive(true);
                 villager.enabled = false;
             }

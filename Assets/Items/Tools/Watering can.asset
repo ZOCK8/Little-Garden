@@ -17,6 +17,6 @@ MonoBehaviour:
   ObjectInHand: {fileID: 6491832573616220257, guid: 7d9a884e7381a66aabf631c711122867, type: 3}
   SellPrice: 1
   BuyPrice: 3
-  ShowcaseImage: {fileID: -3935716550600654456, guid: aac24a591a0288547b887e049bfd4c0b, type: 3}
-  GrownItem: {fileID: 0}
+  ShowcaseImage: {fileID: -2462319196855923916, guid: e60518fc9affdcd8089ed12a63e90471, type: 3}
+  GrownItem: {fileID: -2462319196855923916, guid: e60518fc9affdcd8089ed12a63e90471, type: 3}
   IsDoneGrowing: 1

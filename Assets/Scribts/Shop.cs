@@ -17,6 +17,7 @@ public class Shop : MonoBehaviour
     [SerializeField] private Button BuildingButton;
     [SerializeField] private Button PlantButton;
     [SerializeField] private GameObject ShopElement;
+    [SerializeField] private DialogText dialogText;
     private string Filter;
 
     private BoxCollider2D PlayerBoxCollider;
@@ -83,6 +84,9 @@ public class Shop : MonoBehaviour
     {
         if (inventoryManger.Coins >= item.BuyPrice)
         {
+            dialogText.Text.color = Color.limeGreen;
+            dialogText.TextToDisplay = "you have bought " + item.name;
+            StartCoroutine(dialogText.ShowText());
             inventoryManger.Coins -= item.BuyPrice;
             inventoryManger.ItemsInInv.Add(item);
             inventoryManger.CurrentItem = item;

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InventoryManger : MonoBehaviour
 {
@@ -10,19 +12,22 @@ public class InventoryManger : MonoBehaviour
     private int CurrentItemInt;
     [SerializeField] public GameObject ItemParent;
     [SerializeField] private Transform PlayerHand;
-    [SerializeField] private UnityEngine.UI.Image ItemShowcaseLeft;
-    [SerializeField] private UnityEngine.UI.Image ItemShowcaseMiddle;
-    [SerializeField] private UnityEngine.UI.Image ItemShowcaseRight;
+    [SerializeField] private GameObject ItemShowcaseLeft;
+    [SerializeField] private GameObject ItemShowcaseMiddle;
+    [SerializeField] private GameObject ItemShowcaseRight;
+    [SerializeField] private TextMeshProUGUI CoinsText;
+
     public int Coins;
 
     private GameObject CurrentItemObject;
     void Start()
     {
         CheckItem();
-
+        Coins = 9;
     }
     void Update()
     {
+        CoinsText.text = Coins.ToString() + "$";
         if (CurrentItem == null && ItemsInInv != null)
         {
             CurrentItem = ItemsInInv[0];
@@ -70,7 +75,6 @@ public class InventoryManger : MonoBehaviour
     }
     public void UpdateShowcase()
     {
-        Debug.Log("ddsdasd");
         // left item
         int Leftint = CurrentItemInt - 1;
         if (Leftint < 0)
@@ -84,9 +88,14 @@ public class InventoryManger : MonoBehaviour
             Rightint = 0;
         }
 
-        ItemShowcaseLeft.sprite = ItemsInInv[Leftint].ShowcaseImage;
-        ItemShowcaseMiddle.sprite = ItemsInInv[CurrentItemInt].ShowcaseImage;
-        ItemShowcaseRight.sprite = ItemsInInv[Rightint].ShowcaseImage;
+        ItemShowcaseLeft.GetComponent<Image>().sprite = ItemsInInv[Leftint].ShowcaseImage;
+        ItemShowcaseLeft.GetComponent<Animator>().Play("aniamtion");
+
+        ItemShowcaseMiddle.GetComponent<Image>().sprite = ItemsInInv[CurrentItemInt].ShowcaseImage;
+        ItemShowcaseMiddle.GetComponent<Animator>().Play("Middel");
+
+        ItemShowcaseRight.GetComponent<Image>().sprite = ItemsInInv[Rightint].ShowcaseImage;
+        ItemShowcaseRight.GetComponent<Animator>().Play("aniamtion");
     }
     public void ClearCurrentItem()
     {

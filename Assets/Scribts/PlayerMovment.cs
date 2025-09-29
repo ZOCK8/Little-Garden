@@ -18,6 +18,7 @@ public class PlayerMovment : MonoBehaviour
     [SerializeField] private GameObject BuildingContainer;
     [SerializeField] private GameObject AddItemAnimator;
     [SerializeField] private DialogText dialogText;
+    [SerializeField] private GameObject Sounds;
 
 
     private InputSystem_Actions InputSystem;
@@ -28,6 +29,7 @@ public class PlayerMovment : MonoBehaviour
     public InventoryManger inventoryManger;
     private Vector3 PlantingPos;
     public NightDay nightDay;
+    public bool Planted;
 
     public Vector2 MoveInput { get; private set; }
     void Awake()
@@ -50,6 +52,7 @@ public class PlayerMovment : MonoBehaviour
 
     void Start()
     {
+        Planted = false;
         TCGarden = GardenTile.GetComponent<TilemapCollider2D>();
         Vector2 moveInput = InputSystem.Player.Move.ReadValue<Vector2>();
         PlayerRb = PlayerObject.GetComponent<Rigidbody2D>();
@@ -69,16 +72,28 @@ public class PlayerMovment : MonoBehaviour
             if (Mathf.Abs(moveInput.x) > Mathf.Abs(moveInput.y))
             {
                 PlayerObject.GetComponent<Animator>().Play("PlayerWalking Side");
+                if (!Sounds.transform.GetChild(0).GetComponent<AudioSource>().isPlaying)
+                {
+                    Sounds.transform.GetChild(0).GetComponent<AudioSource>().Play();
+                }
             }
             else
             {
                 if (moveInput.y > 0)
                 {
                     PlayerObject.GetComponent<Animator>().Play("PlayerWalking up");
+                    if (!Sounds.transform.GetChild(0).GetComponent<AudioSource>().isPlaying)
+                    {
+                        Sounds.transform.GetChild(0).GetComponent<AudioSource>().Play();
+                    }
                 }
                 if (moveInput.y < 0)
                 {
                     PlayerObject.GetComponent<Animator>().Play("PlayerWalking Side");
+                    if (!Sounds.transform.GetChild(0).GetComponent<AudioSource>().isPlaying)
+                    {
+                        Sounds.transform.GetChild(0).GetComponent<AudioSource>().Play();
+                    }
                 }
             }
         }
@@ -100,6 +115,10 @@ public class PlayerMovment : MonoBehaviour
         /////////////////////////////
         if (InputSystem.Player.Interact.WasPressedThisFrame() && PlayerRb.IsTouching(TCGarden) && inventoryManger.CurrentItem.name == "Scare Crow")
         {
+            if (!Sounds.transform.GetChild(1).GetComponent<AudioSource>().isPlaying)
+            {
+                Sounds.transform.GetChild(1).GetComponent<AudioSource>().Play();
+            }
             GameObject ScareCrow = Instantiate(inventoryManger.CurrentItem.ObjectInHand);
             Vector3 TilePos = GardenTile.WorldToCell(PlayerObject.transform.position) + new Vector3(0.5f, 0.7f, 0);
             ScareCrow.transform.position = TilePos;
@@ -120,10 +139,12 @@ public class PlayerMovment : MonoBehaviour
                 Debug.Log("is touching grass");
                 if (inventoryManger.CurrentItem.name == "Shovel")
                 {
-                    Debug.Log("tryig to estroy");
-
                     Vector3Int TilePos = GardenTile.WorldToCell(PlayerObject.transform.position);
                     TileBase tile = GardenTile.GetTile(TilePos);
+                    if (!Sounds.transform.GetChild(3).GetComponent<AudioSource>().isPlaying)
+                    {
+                        Sounds.transform.GetChild(3).GetComponent<AudioSource>().Play();
+                    }
                     if (tile.name == "Grass")
                     {
                         Debug.Log("Ther is dirt to destroy at: " + tile.name);
@@ -177,6 +198,10 @@ public class PlayerMovment : MonoBehaviour
                 if (PlayerBc.IsTouching(PlantsContainer.transform.GetChild(i).GetComponent<BoxCollider2D>()))
                 {
                     inventoryManger.ItemParent.transform.GetChild(0).GetComponent<Animator>().Play("Sickle");
+                    if (!Sounds.transform.GetChild(4).GetComponent<AudioSource>().isPlaying)
+                    {
+                        Sounds.transform.GetChild(4).GetComponent<AudioSource>().Play();
+                    }
                     var Plant = PlantsContainer.transform.GetChild(i).gameObject;
                     if (Plant.GetComponent<Plants>().IsDone)
                     {
@@ -200,6 +225,10 @@ public class PlayerMovment : MonoBehaviour
             {
                 if (PlayerBc.IsTouching(PlantsContainer.transform.GetChild(i).GetComponent<BoxCollider2D>()))
                 {
+                    if (!Sounds.transform.GetChild(2).GetComponent<AudioSource>().isPlaying)
+                    {
+                        Sounds.transform.GetChild(2).GetComponent<AudioSource>().Play();
+                    }
                     inventoryManger.ItemParent.transform.GetChild(0).GetComponent<Animator>().Play("Watering");
                     PlantsContainer.transform.GetChild(i).GetComponent<Plants>().WasWatered = true;
                     Vector3Int PosTile = GardenTile.WorldToCell(PlantsContainer.transform.GetChild(i).transform.position);
@@ -213,6 +242,11 @@ public class PlayerMovment : MonoBehaviour
     }
     public void Planting(GameObject PlantingPlant)
     {
+        Planted = true;
+        if (!Sounds.transform.GetChild(1).GetComponent<AudioSource>().isPlaying)
+        {
+            Sounds.transform.GetChild(1).GetComponent<AudioSource>().Play();
+        }
         Vector3Int tilepos = GardenTile.WorldToCell(PlantingPos);
         GardenTile.SetColor(tilepos, Color.navajoWhite);
         PlantingPlant.transform.position = PlantingPos;
@@ -232,7 +266,7 @@ public class PlayerMovment : MonoBehaviour
         {
             Items instanceData = ScriptableObject.CreateInstance<Items>();
             Items original = PlantToDestroy.GetComponent<Plants>().items;
-            instanceData.IsDoneGrowing = true;                  
+            instanceData.IsDoneGrowing = true;
             instanceData.name = "Grown" + original.name;
             instanceData.ShowcaseImage = original.GrownItem;
             instanceData.SellPrice = original.SellPrice * 2;
